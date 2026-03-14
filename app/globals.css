@@ -23,4 +23,63 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
 }
+
+.container {
+  padding: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background: white;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.price {
+  color: #b12704;
+  font-weight: bold;
+}
+
+.rating {
+  font-size: 14px;
+  color: #555;
+}
+
+button {
+  background: #ffd814;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f7ca00;
+}
+
+
