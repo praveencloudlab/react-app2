@@ -1,116 +1,198 @@
 'use client'
 
 import RatingSummaryHover from "./RatingSummaryHover"
+import StarRating from "./StarRating"
 
-function generateRatingBreakdown(rating: number) {
-
-  const five = Math.round((rating / 5) * 60)
-  const four = Math.round((rating / 5) * 25)
-  const three = Math.round((rating / 5) * 10)
-  const two = Math.round((rating / 5) * 3)
-  const one = 100 - (five + four + three + two)
-
-  return {
-    5: five,
-    4: four,
-    3: three,
-    2: two,
-    1: one
-  }
+type Review = {
+  rating: number
+  comment: string
+  date: string
+  reviewerName: string
+  reviewerEmail: string
 }
 
-export default function ProductDetails({ product }: any) {
+type Product = {
+  id: number
+  title: string
+  description: string
+  price: number
+  discountPercentage: number
+  rating: number
+  brand: string
+  category: string
+  stock: number
+  thumbnail: string
+  images: string[]
+  reviews?: Review[]
+}
 
-  if (!product) return null
-  const breakdown = generateRatingBreakdown(product.rating)
+export default function ProductDetails({ product }: { product: Product }) {
 
-  const totalRatings = Math.floor(product.rating * 320)
+  // Safe reviews fallback
+  const reviews = product.reviews ?? []
 
+  // Generate rating breakdown from reviews
+  const generateRatingBreakdown = (reviews: Review[]) => {
 
+    const counts = {5:0,4:0,3:0,2:0,1:0}
 
+    reviews.forEach((rev)=>{
+      counts[rev.rating as 1|2|3|4|5]++
+    })
 
+    const total = reviews.length || 1
+
+    return {
+      5: Math.round((counts[5] / total) * 100),
+      4: Math.round((counts[4] / total) * 100),
+      3: Math.round((counts[3] / total) * 100),
+      2: Math.round((counts[2] / total) * 100),
+      1: Math.round((counts[1] / total) * 100)
+    }
+  }
+
+  const breakdown = generateRatingBreakdown(reviews)
+  const totalRatings = reviews.length
+
+  // Dynamic extra info
+  const warrantyInformation = `${1 + (product.id % 3)} year manufacturer warranty`
+
+  const shippingInformation =
+    product.stock > 0
+      ? `Free delivery in ${2 + (product.id % 4)} business days`
+      : "Delivery unavailable"
+
+  const availabilityStatus =
+    product.stock > 0 ? "In Stock" : "Out of Stock"
 
   return (
 
-    <div className="grid grid-cols-2 gap-10">
+    <div className="max-w-[900px] mx-auto p-6 space-y-6 bg-white">
 
-      {/* Image Section */}
+      {/* Title */}
+      <h1 className="text-2xl font-semibold">
+        {product.title}
+      </h1>
 
-      <div>
+      {/* Images */}
+      <div className="flex gap-3 overflow-x-auto">
 
-        <img
-          src={product.thumbnail}
-          className="w-full rounded"
-        />
+        {product.images.map((img, i) => (
 
-        <div className="flex gap-3 mt-3">
+          <img
+            key={i}
+            src={img}
+            alt={product.title}
+            className="w-48 h-48 object-cover rounded"
+          />
 
-          {product.images?.map((img:string,i:number)=>(
-            <img
-              key={i}
-              src={img}
-              className="w-16 h-16 border rounded"
-            />
-          ))}
-
-        </div>
+        ))}
 
       </div>
 
-
       {/* Product Info */}
+      <div className="flex flex-col gap-3">
 
-      <div>
+        {/* Rating */}
+        <div className="flex items-center gap-2">
 
-        <h1 className="text-2xl font-semibold">
-          {product.title}
-        </h1>
+          <span className="font-medium">
+            {product.rating.toFixed(1)}
+          </span>
 
-        <p className="text-gray-500 mt-1">
-          Brand: {product.brand}
-        </p>
+          <RatingSummaryHover
+            rating={product.rating}
+            totalRatings={totalRatings}
+            breakdown={breakdown}
+          />
 
-
-        {/* Amazon style rating */}
-
-        <div className="mt-3">
-
-           <RatingSummaryHover
-          rating={product.rating}
-          totalRatings={totalRatings}
-          breakdown={breakdown}
-        />
+          <span className="text-gray-500">
+            ({totalRatings} ratings)
+          </span>
 
         </div>
 
-
-        <p className="text-3xl font-bold mt-4">
+        {/* Price */}
+        <p className="text-3xl font-bold">
           ${product.price}
         </p>
 
-        <p className="mt-4 text-gray-700">
+        {/* Availability */}
+        <p
+          className={
+            availabilityStatus === "In Stock"
+              ? "text-green-600 font-medium"
+              : "text-red-600 font-medium"
+          }
+        >
+          {availabilityStatus}
+        </p>
+
+        {/* Warranty */}
+        <p className="text-gray-700">
+          Warranty: {warrantyInformation}
+        </p>
+
+        {/* Shipping */}
+        <p className="text-gray-700">
+          Shipping: {shippingInformation}
+        </p>
+
+        {/* Description */}
+        <p className="text-gray-800">
           {product.description}
         </p>
 
-        <div className="mt-4 text-sm space-y-1">
+      </div>
 
-          <p>
-            <b>Category:</b> {product.category}
-          </p>
+      {/* Reviews */}
+      <div className="mt-6">
 
-          <p>
-            <b>Stock:</b> {product.stock}
-          </p>
+        <h2 className="text-xl font-semibold mb-3">
+          Customer Reviews
+        </h2>
 
-          <p>
-            <b>Discount:</b> {product.discountPercentage}%
-          </p>
+        <div className="space-y-4">
+
+          {reviews.length === 0 && (
+            <p className="text-gray-500">
+              No reviews available.
+            </p>
+          )}
+
+          {reviews.map((rev, i) => (
+
+            <div
+              key={i}
+              className="border p-4 rounded"
+            >
+
+              <div className="flex items-center gap-2">
+
+                <StarRating
+                  rating={rev.rating}
+                  size={16}
+                />
+
+                <span className="text-sm font-medium">
+                  {rev.reviewerName}
+                </span>
+
+              </div>
+
+              <p className="text-gray-700 mt-1">
+                {rev.comment}
+              </p>
+
+              <p className="text-xs text-gray-400">
+                {new Date(rev.date).toLocaleDateString()}
+              </p>
+
+            </div>
+
+          ))}
 
         </div>
-
-        <button className="mt-6 bg-yellow-400 px-6 py-2 rounded font-semibold hover:bg-yellow-500">
-          Add to Basket
-        </button>
 
       </div>
 
