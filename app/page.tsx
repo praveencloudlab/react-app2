@@ -11,7 +11,7 @@ export default async function Home() {
 
   return (
     <main className="max-w-[1100px] mx-auto p-6">
-      <h1 className="text-2xl font-semibold mb-6">Products</h1>
+      <h1 className="text-2xl font-semibold mb-6">Products App</h1>
 
       {/* Stack products vertically, each one full width */}
       <div className="flex flex-col space-y-6">
