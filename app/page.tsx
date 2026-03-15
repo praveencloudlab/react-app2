@@ -11,8 +11,11 @@ export default async function Home() {
 
   return (
     <main className="max-w-[1100px] mx-auto p-6">
-      <h1 className="text-2xl font-semibold mb-6">Products App-V1</h1>
+<div className="bg-blue-100 border border-blue-400 text-blue-800 px-4 py-3 rounded text-center text-xl font-semibold">
+  My App Title
+</div>
 
+<br/>
       {/* Stack products vertically, each one full width */}
       <div className="flex flex-col space-y-6">
         {products.map((product: any) => (
