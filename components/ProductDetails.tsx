@@ -3,6 +3,7 @@
 import RatingSummaryHover from "./RatingSummaryHover"
 import StarRating from "./StarRating"
 
+// reviews
 type Review = {
   rating: number
   comment: string
