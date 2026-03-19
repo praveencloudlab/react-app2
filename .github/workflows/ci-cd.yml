@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+  defaults:
+    run:
+      working-directory: ./app1 # Replace with your folder name
 
     steps:
     - name: Checkout code
