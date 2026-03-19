@@ -1,118 +1,63 @@
-'use client'
+import Link from "next/link"
+import StarRating from "./StarRating"
 
-import RatingSummaryHover from "./RatingSummaryHover"
+export default function ProductCard({ product }: any) {
 
-function getRatingBreakdown(reviews: { rating: number }[]) {
-
-  const counts = {
-    5: 0,
-    4: 0,
-    3: 0,
-    2: 0,
-    1: 0
-  }
-
-  reviews.forEach((r) => {
-    if (counts[r.rating as 1 | 2 | 3 | 4 | 5] !== undefined) {
-      counts[r.rating as 1 | 2 | 3 | 4 | 5]++
-    }
-  })
-
-  const total = reviews.length
-
-  const percentages = {
-    5: Math.round((counts[5] / total) * 100),
-    4: Math.round((counts[4] / total) * 100),
-    3: Math.round((counts[3] / total) * 100),
-    2: Math.round((counts[2] / total) * 100),
-    1: Math.round((counts[1] / total) * 100)
-  }
-
-  return { counts, percentages, total }
-}
-type Review = {
-  rating: number
-  comment: string
-}
-
-type Product = {
-  id: number
-  title: string
-  description:String
-  shippingInformation:String
-  price: number
-  thumbnail: string
-  rating: number
-  reviews: Review[]
-}
-
-
-export default function ProductCard({product}:{product:Product}) {
-const { percentages, total } = getRatingBreakdown(product.reviews)
-  
+  const totalRatings = Math.floor(product.rating * 200) // generate total ratings dynamically
 
   return (
+    <div className="border rounded-lg hover:shadow-lg transition w-full flex p-4 bg-white">
 
-    <div className="flex gap-6 border-b py-6 max-w-[1000px]">
-
-      {/* Image */}
-
-      <div className="w-[250px] flex items-center justify-center">
-
+      {/* IMAGE LEFT */}
+      <Link href={`/product/${product.id}`} className="w-[200px] flex-shrink-0">
         <img
           src={product.thumbnail}
           alt={product.title}
-          className="max-h-[160px] object-contain"
+          className="w-full h-[180px] object-cover rounded"
         />
+      </Link>
 
-      </div>
+      {/* DETAILS RIGHT */}
+      <div className="flex flex-col justify-between flex-1 ml-6">
 
+        {/* Product info */}
+        <div>
+          <Link href={`/product/${product.id}`}>
+            <h2 className="text-lg font-semibold hover:text-blue-600 line-clamp-2">
+              {product.title}
+            </h2>
+          </Link>
 
+          <p className="text-sm text-gray-500 mt-1">Brand: {product.brand}</p>
 
-      {/* Details */}
+          {/* Rating: value before stars, stars, total ratings after stars */}
+          <div className="flex items-center gap-2 mt-1">
+            <span className="text-sm font-medium">{product.rating.toFixed(1)}</span>
+            <StarRating rating={product.rating} size={16} />
+            <span className="text-sm text-gray-500">({totalRatings.toLocaleString()})</span>
+          </div>
 
-      <div className="flex flex-col flex-1">
-
-        <h2 className="text-lg text-blue-700 hover:underline cursor-pointer">
-
-          {product.title}
-
-        </h2>
-
- <div className="flex items-center gap-2 mt-1">
-            <p className="text-gray-700 text-sm mt-1">{product.description}</p>
-
- </div>
-        <div className="flex items-center gap-2 mt-1">
-
-          <span>{product.rating}</span>
-
-          <RatingSummaryHover
-  rating={product.rating}
-  totalRatings={total}
-  breakdown={percentages}
-/>
-
-         
+          <p className="text-sm text-gray-600 mt-2 line-clamp-2">
+            {product.description}
+          </p>
         </div>
 
+        {/* Price & Buttons */}
+        <div className="flex items-center justify-between mt-4">
+          <p className="text-2xl font-bold">${product.price}</p>
 
-        <div className="text-3xl mt-2">
-          £{product.price}
+          <div className="flex gap-3">
+            <button className="bg-yellow-400 px-4 py-2 rounded hover:bg-yellow-500">
+              Add to Basket
+            </button>
+            <button className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+              Buy Now
+            </button>
+          </div>
         </div>
 
-
-        <p className="text-sm mt-1">
-          FREE delivery <b>{product.shippingInformation}</b>
-        </p>
-<div className="mt-2 w-max">
-  <button className="bg-yellow-400 hover:bg-yellow-500 text-black text-sm font-medium px-3 py-1 rounded-full">
-    Add to Basket
-  </button>
-</div>
       </div>
 
     </div>
-
   )
 }

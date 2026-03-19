@@ -1,0 +1,36 @@
+name: Next.js CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, main, feature-prod-details ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js App
+        # This will now use 'next build' instead of 'react-scripts'
+        run: npm run build
+        env:
+          CI: false
+
+      - name: Deploy 🚀
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: out # Next.js static exports go to 'out'
+          branch: gh-pages

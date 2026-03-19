@@ -1,7 +1,5 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-export default nextConfig;
+const nextConfig = {
+  output: 'export',
+  distDir: 'out', // Force it to be named 'out'
+  images: { unoptimized: true }
+}
