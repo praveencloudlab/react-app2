@@ -28,3 +28,9 @@ jobs:
 
     - name: Build React App
       run: npm run build
+    - name: Deploy 🚀
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: build # This matches the folder our "predeploy" creates
+        branch: gh-pages
