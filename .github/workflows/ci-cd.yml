@@ -22,7 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build App
+      - name: Build Next.js App
+        # This will now use 'next build' instead of 'react-scripts'
         run: npm run build
         env:
           CI: false
@@ -31,5 +32,5 @@ jobs:
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: out
+          folder: out # Next.js static exports go to 'out'
           branch: gh-pages
