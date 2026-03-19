@@ -2,9 +2,14 @@ name: Next.js CI/CD Pipeline
 
 on:
   push:
-    branches: [ master, main, feature-prod-details ]
+    branches: 
+      - main
+      - master
+      - feature-prod-details
   pull_request:
-    branches: [ master, main ]
+    branches: 
+      - main
+      - master
 
 jobs:
   build:
@@ -23,14 +28,18 @@ jobs:
         run: npm install
 
       - name: Build Next.js App
-        # This will now use 'next build' instead of 'react-scripts'
         run: npm run build
         env:
           CI: false
 
-      - name: Deploy 🚀
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+      - name: Check if 'out' exists
+        # This will show up in your logs to help us debug
+        run: ls -d out || echo "OUT FOLDER NOT FOUND"
+
+      - name: Deploy to GitHub Pages 🚀
+        # This only runs on your main/master branch
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: out # Next.js static exports go to 'out'
+          folder: out 
           branch: gh-pages
