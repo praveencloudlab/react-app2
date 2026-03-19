@@ -1,4 +1,4 @@
-name: React CI/CD Pipeline
+name: Next.js CI/CD Pipeline
 
 on:
   push:
@@ -22,16 +22,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build App
-        # Note: Since I see 'next.config', this is a Next.js app!
-        # Next.js uses 'npm run build' just like React.
+      - name: Build Next.js App
+        # Next.js uses 'next build' which is triggered by 'npm run build'
         run: npm run build
-        env:
-          CI: false
 
-      - name: Deploy 🚀
+      - name: Deploy to GitHub Pages 🚀
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: out # Next.js usually builds to 'out' or '.next'
+          folder: out   # Next.js 'export' creates an 'out' folder, not 'build'
           branch: gh-pages
