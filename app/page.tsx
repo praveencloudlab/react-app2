@@ -12,7 +12,7 @@ export default async function Home() {
   return (
     <main className="max-w-[1100px] mx-auto p-6">
 <div className="bg-blue-100 border border-blue-400 text-blue-800 px-4 py-3 rounded text-center text-xl font-semibold">
- Demo App CI/CD
+ Demo App
 </div>
 
 <br/>
