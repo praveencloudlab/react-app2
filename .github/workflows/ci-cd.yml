@@ -9,10 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # This tells GitHub to run all 'run' commands inside the app1 folder
-    defaults:
-      run:
-        working-directory: ./app1
 
     steps:
       - name: Checkout code
@@ -22,14 +18,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          #cache: 'npm'
-          # Tell the cache to look for the lockfile inside app1
-          #cache-dependency-path: ./app1/package-lock.json
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build React App
+      - name: Build App
+        # Note: Since I see 'next.config', this is a Next.js app!
+        # Next.js uses 'npm run build' just like React.
         run: npm run build
         env:
           CI: false
@@ -38,5 +33,5 @@ jobs:
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: app1/build # We point to the build folder inside app1
+          folder: out # Next.js usually builds to 'out' or '.next'
           branch: gh-pages
