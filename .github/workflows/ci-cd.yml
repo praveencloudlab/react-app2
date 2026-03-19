@@ -9,32 +9,34 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-  defaults:
-    run:
-      working-directory: ./app1 # Replace with your folder name
+    # This tells GitHub to run all 'run' commands inside the app1 folder
+    defaults:
+      run:
+        working-directory: ./app1
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          # Tell the cache to look for the lockfile inside app1
+          cache-dependency-path: ./app1/package-lock.json
 
-    - name: Install dependencies
-      # We use 'npm ci' because it's faster and more reliable for CI/CD
-      run: npm ci || npm install 
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build React App
-      # This is where it was failing before
-      run: npm run build
-      env:
-        CI: false # This prevents some warnings from being treated as errors
+      - name: Build React App
+        run: npm run build
+        env:
+          CI: false
 
-    - name: Deploy 🚀
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: build
-        branch: gh-pages
+      - name: Deploy 🚀
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: app1/build # We point to the build folder inside app1
+          branch: gh-pages
