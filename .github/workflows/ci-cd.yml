@@ -2,35 +2,46 @@ name: Next.js CI/CD Pipeline
 
 on:
   push:
-    branches: [ master, main, feature-prod-details ]
+    branches:
+      - main
+      - feature-prod-details # This ensures Jira sees updates from your feature branch too
   pull_request:
-    branches: [ master, main ]
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout 🛎️
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js ⚙️
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install Dependencies 📦
         run: npm install
 
-      - name: Build Next.js App
-        # This will now use 'next build' instead of 'react-scripts'
+      - name: Build Next.js App 🏗️
+        # This step is CRITICAL. It creates the 'out' folder.
         run: npm run build
         env:
-          CI: false
+          CI: false # Prevents warnings from being treated as errors
+
+      - name: Add .nojekyll 🛡️
+        # This stops GitHub from hiding the _next folder (Fixes CSS/JS 404s)
+        run: touch out/.nojekyll
 
       - name: Deploy 🚀
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: out # Next.js static exports go to 'out'
-          branch: gh-pages
+          folder: out # The folder created by 'npm run build'
+          branch: gh-pages # The branch GitHub Pages uses to show your site
+          clean: true
