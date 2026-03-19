@@ -9,11 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-    # This tells GitHub to go INTO the app1 folder for all commands
-    defaults:
-      run:
-        working-directory: ./app1
 
     steps:
       - name: Checkout code
@@ -27,15 +22,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Next.js App
+      - name: Build App
         run: npm run build
         env:
           CI: false
 
-      - name: Deploy to GitHub Pages 🚀
+      - name: Deploy 🚀
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          # Note the path: it needs the app1 prefix to find the 'out' folder
-          folder: app1/out   
+          folder: out
           branch: gh-pages
