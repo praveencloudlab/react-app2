@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[22016,["/react-app2/_next/static/chunks/7c92e96509cd355e.js"],""]
+3:I[97367,["/react-app2/_next/static/chunks/ff1a16fafef87110.js","/react-app2/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+:HL["https://cdn.dummyjson.com/product-images/groceries/chicken-meat/thumbnail.webp","image"]
+0:{"buildId":"NZVsj9IhuZGXzGeLC1Szr","rsc":["$","$1","c",{"children":[["$","div",null,{"style":{"padding":"20px"},"children":[["$","$L2",null,{"href":"/","children":"← Back"}],["$","h1",null,{"children":"Chicken Meat"}],["$","img",null,{"src":"https://cdn.dummyjson.com/product-images/groceries/chicken-meat/thumbnail.webp","alt":"Chicken Meat","width":300}],["$","p",null,{"children":"Fresh and tender chicken meat, suitable for various culinary preparations."}]]}],[["$","script","script-0",{"src":"/react-app2/_next/static/chunks/7c92e96509cd355e.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+5:null

@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[22016,["/react-app2/_next/static/chunks/7c92e96509cd355e.js"],""]
+3:I[97367,["/react-app2/_next/static/chunks/ff1a16fafef87110.js","/react-app2/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+:HL["https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/thumbnail.webp","image"]
+0:{"buildId":"NZVsj9IhuZGXzGeLC1Szr","rsc":["$","$1","c",{"children":[["$","div",null,{"style":{"padding":"20px"},"children":[["$","$L2",null,{"href":"/","children":"← Back"}],["$","h1",null,{"children":"Nike Baseball Cleats"}],["$","img",null,{"src":"https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/thumbnail.webp","alt":"Nike Baseball Cleats","width":300}],["$","p",null,{"children":"Nike Baseball Cleats are designed for maximum traction and performance on the baseball field. They provide stability and support for players during games and practices."}]]}],[["$","script","script-0",{"src":"/react-app2/_next/static/chunks/7c92e96509cd355e.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+5:null
