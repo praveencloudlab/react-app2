@@ -1,4 +1,4 @@
-:HL["/react-app2/_next/static/chunks/1acc3ec1b1c7a5b9.css","style"]
+:HL["/react-app2/_next/static/chunks/b70492e6edba2b6c.css","style"]
 :HL["https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp","image"]
 :HL["https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp","image"]
 :HL["https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp","image"]
@@ -19,4 +19,4 @@
 :HL["https://cdn.dummyjson.com/product-images/groceries/cat-food/thumbnail.webp","image"]
 :HL["https://cdn.dummyjson.com/product-images/groceries/chicken-meat/thumbnail.webp","image"]
 :HL["https://cdn.dummyjson.com/product-images/groceries/cooking-oil/thumbnail.webp","image"]
-0:{"buildId":"g-zqhJPAcM0_nMNizYL_3","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"dkF2AuuwaR5tICE4HLVYK","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
