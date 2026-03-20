@@ -19,4 +19,4 @@
 :HL["https://cdn.dummyjson.com/product-images/groceries/cat-food/thumbnail.webp","image"]
 :HL["https://cdn.dummyjson.com/product-images/groceries/chicken-meat/thumbnail.webp","image"]
 :HL["https://cdn.dummyjson.com/product-images/groceries/cooking-oil/thumbnail.webp","image"]
-0:{"buildId":"HQkefRX1QRqgRCXSJopii","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"CAFtSvg_bnGgTrxzmIbzL","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
