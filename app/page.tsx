@@ -16,7 +16,7 @@ export default async function Home() {
         padding: '0 20px',
         color: 'white'
       }}>
-        <h1>Welcome to Demo App ACP</h1>
+       
       </div>
 
       {/* Responsive Grid */}
